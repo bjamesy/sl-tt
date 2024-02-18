@@ -13,7 +13,14 @@ def students():
     if request.method == "POST":
         return "post students"
     if request.method == "GET":
-        return "get students"
+        db = mysql.connection.cursor()
+        db.execute("""SELECT * FROM student""")
+
+        students = db.fetchall()
+
+        db.close()
+
+        return str(students)
 
 #courses
 @app.route("/courses", methods=["POST", "GET"])
@@ -21,7 +28,13 @@ def courses():
     if request.method == "POST":
         return "post courses"
     if request.method == "GET":
-        return "get courses"
+        db = mysql.connection.cursor()
+        db.execute("""SELECT * FROM course""")
+
+        courses = db.fetchall()
+        
+        db.close()
+        return str(courses)
 
 
 #results
@@ -30,7 +43,13 @@ def results():
     if request.method == "POST":
         return "post results "
     if request.method == "GET":
-        return "get results "
+        db = mysql.connection.cursor()
+        db.execute("""SELECT * FROM result""")
+
+        results = db.fetchall()
+        
+        db.close()
+        return str(results)
 
 
 if(__name__ == "__main__"):
