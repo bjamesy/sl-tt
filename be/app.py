@@ -11,7 +11,20 @@ mysql = MySQL(app)
 @app.route("/students", methods=["POST", "GET"])
 def students():
     if request.method == "POST":
-        return "post students"
+        first_name = request.form['firstName']
+        last_name = request.form['lastName']
+        email = request.form["email"]
+        dob = request.form['dob']
+
+        query = f"INSERT INTO student VALUES({first_name}, {last_name}, {dob}, {email})"
+
+        cursor = mysql.connection.cursor()
+        student_res = cursor.execute(query)
+        #checks
+        mysql.connection.commit()
+        cursor.close()
+        
+        return student_res
     if request.method == "GET":
         db = mysql.connection.cursor()
         db.execute("""SELECT * FROM student""")
@@ -26,7 +39,17 @@ def students():
 @app.route("/courses", methods=["POST", "GET"])
 def courses():
     if request.method == "POST":
-        return "post courses"
+        name = request.form['name']
+
+        query = f"INSERT INTO course VALUES({name})"
+
+        cursor = mysql.connection.cursor()
+        course_res = cursor.execute(query)
+        #checks
+        mysql.connection.commit()
+        cursor.close()
+
+        return course_res
     if request.method == "GET":
         db = mysql.connection.cursor()
         db.execute("""SELECT * FROM course""")
@@ -41,7 +64,19 @@ def courses():
 @app.route("/results", methods=["GET", "POST"])
 def results():
     if request.method == "POST":
-        return "post results "
+        student = request.form['student']
+        course = request.form["course"]
+        score = request.form["score"]
+        
+        query = f"INSERT INTO result VALUES({student}, {course}, {score})"
+
+        cursor = mysql.connection.cursor()
+        results_res = cursor.execute(query)
+        #checks
+        mysql.connection.commit()
+        cursor.close()
+
+        return results_res
     if request.method == "GET":
         db = mysql.connection.cursor()
         db.execute("""SELECT * FROM result""")
