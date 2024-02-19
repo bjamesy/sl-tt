@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, jsonify, request
 from flask_mysqldb import MySQL
 
 app = Flask(__name__)
@@ -24,16 +24,17 @@ def students():
         mysql.connection.commit()
         cursor.close()
         
-        return student_res
+        return jsonify(student_res)
     if request.method == "GET":
         db = mysql.connection.cursor()
-        db.execute("""SELECT * FROM student""")
+        db.execute("""SELECT first_name, last_name, dob, email FROM student""")
 
         students = db.fetchall()
 
         db.close()
 
-        return str(students)
+        print("RESPONSE", students)
+        return jsonify(students)
 
 #courses
 @app.route("/courses", methods=["POST", "GET"])
@@ -49,16 +50,17 @@ def courses():
         mysql.connection.commit()
         cursor.close()
 
-        return course_res
+        return jsonify(course_res)
     if request.method == "GET":
         db = mysql.connection.cursor()
-        db.execute("""SELECT * FROM course""")
+        db.execute("""SELECT name FROM course""")
 
         courses = db.fetchall()
         
         db.close()
-        return str(courses)
 
+        print("RESPONSE", courses)
+        return jsonify(courses)
 
 #results
 @app.route("/results", methods=["GET", "POST"])
@@ -76,15 +78,17 @@ def results():
         mysql.connection.commit()
         cursor.close()
 
-        return results_res
+        return jsonify(results_res)
     if request.method == "GET":
         db = mysql.connection.cursor()
-        db.execute("""SELECT * FROM result""")
+        db.execute("""SELECT score FROM result""")
 
         results = db.fetchall()
         
         db.close()
-        return str(results)
+
+        print("RESPONSE", results)
+        return jsonify(results)
 
 
 if(__name__ == "__main__"):
