@@ -1,22 +1,20 @@
 "use client"
 import { useEffect, useState } from "react"
 
-const { BASE_API_URL } = process.env
+const { NEXT_PUBLIC_API_URL } = process.env
 
 export default function Home() {
   const [data, setData] = useState([])
   const [url, setUrl] = useState([])
 
   useEffect(() => {
-    const fetchData = async () => {
-        const response = await fetch(BASE_API_URL + "/students", {
-            mode: 'no-cors',
-        })
+    (async () => {
+        const response = await fetch("http://127.0.0.1:5000/students")
 
-        setData(response)
-    }
+        const res = await response.json()
 
-    fetchData()
+        setData(res)
+    })()
   }, [])
 
   console.log("RESULT", data)

@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, make_response
 from flask_mysqldb import MySQL
 
 app = Flask(__name__)
@@ -24,7 +24,10 @@ def students():
         mysql.connection.commit()
         cursor.close()
         
-        return jsonify(student_res)
+        print("RESPONSE", student_res)
+        response = jsonify(student_res)
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response
     if request.method == "GET":
         db = mysql.connection.cursor()
         db.execute("""SELECT first_name, last_name, dob, email FROM student""")
@@ -34,7 +37,9 @@ def students():
         db.close()
 
         print("RESPONSE", students)
-        return jsonify(students)
+        response = jsonify(students)
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response
 
 #courses
 @app.route("/courses", methods=["POST", "GET"])
@@ -50,7 +55,10 @@ def courses():
         mysql.connection.commit()
         cursor.close()
 
-        return jsonify(course_res)
+        print("RESPONSE", course_res)
+        response = jsonify(course_res)
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response
     if request.method == "GET":
         db = mysql.connection.cursor()
         db.execute("""SELECT name FROM course""")
@@ -60,7 +68,9 @@ def courses():
         db.close()
 
         print("RESPONSE", courses)
-        return jsonify(courses)
+        response = jsonify(courses)
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response
 
 #results
 @app.route("/results", methods=["GET", "POST"])
@@ -78,7 +88,10 @@ def results():
         mysql.connection.commit()
         cursor.close()
 
-        return jsonify(results_res)
+        print("RESPONSE", results_res)
+        response = jsonify(results_res)
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response
     if request.method == "GET":
         db = mysql.connection.cursor()
         db.execute("""SELECT score FROM result""")
@@ -88,7 +101,9 @@ def results():
         db.close()
 
         print("RESPONSE", results)
-        return jsonify(results)
+        response = jsonify(results)
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response
 
 
 if(__name__ == "__main__"):
