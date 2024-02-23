@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, make_response
+from flask import Flask, jsonify, request
 from flask_mysqldb import MySQL
 
 app = Flask(__name__)
@@ -9,7 +9,7 @@ mysql = MySQL(app)
 
 #students
 @app.route("/students", methods=["POST", "GET"])
-def students():
+async def students():
     if request.method == "POST":
         first_name = request.form['firstName']
         last_name = request.form['lastName']
@@ -18,7 +18,7 @@ def students():
 
         query = f"INSERT INTO student VALUES({first_name}, {last_name}, {dob}, {email})"
 
-        cursor = mysql.connection.cursor()
+        cursor = await mysql.connection.cursor()
         student_res = cursor.execute(query)
         #checks
         mysql.connection.commit()
@@ -28,6 +28,22 @@ def students():
         response = jsonify(student_res)
         response.headers.add('Access-Control-Allow-Origin', '*')
         return response
+    if request.method == "DELETE":
+        id = request.args.get('id')
+
+        query = f"DELETE FROM student WHERE id={id}"
+
+        cursor = mysql.connection.cursor()
+        student_res = cursor.execute(query)
+        #checks
+        mysql.connection.commit()
+        cursor.close()
+
+        print("RESPONSE", student_res)
+        response = jsonify(student_res)
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response
+
     if request.method == "GET":
         db = mysql.connection.cursor()
         db.execute("""SELECT first_name, last_name, dob, email FROM student""")
@@ -36,18 +52,33 @@ def students():
 
         db.close()
 
-        print("RESPONSE", students)
         response = jsonify(students)
+        print("RESPONSE", students)
         response.headers.add('Access-Control-Allow-Origin', '*')
         return response
 
 #courses
-@app.route("/courses", methods=["POST", "GET"])
+@app.route("/courses", methods=["POST", "GET", "DELETE"])
 def courses():
     if request.method == "POST":
         name = request.form['name']
 
         query = f"INSERT INTO course VALUES({name})"
+
+        cursor = mysql.connection.cursor()
+        course_res = cursor.execute(query)
+        #checks
+        mysql.connection.commit()
+        cursor.close()
+
+        print("RESPONSE", course_res)
+        response = jsonify(course_res)
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response
+    if request.method == "DELETE":
+        id = request.args.get('id')
+
+        query = f"DELETE FROM course WHERE id={id}"
 
         cursor = mysql.connection.cursor()
         course_res = cursor.execute(query)
@@ -90,6 +121,21 @@ def results():
 
         print("RESPONSE", results_res)
         response = jsonify(results_res)
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response
+    if request.method == "DELETE":
+        id = request.args.get('id')
+
+        query = f"DELETE FROM result WHERE id={id}"
+
+        cursor = mysql.connection.cursor()
+        result_res = cursor.execute(query)
+        #checks
+        mysql.connection.commit()
+        cursor.close()
+
+        print("RESPONSE", result_res)
+        response = jsonify(result_res)
         response.headers.add('Access-Control-Allow-Origin', '*')
         return response
     if request.method == "GET":
