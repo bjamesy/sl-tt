@@ -17,7 +17,9 @@ const ResultList = () => {
   }, [])
 
   const deleteResult = async(id) => {
-    const response  = await fetch(`http://127.0.0.1:5000/results/${id}`)
+    const response  = await fetch(`http://127.0.0.1:5000/results/${id}`,{
+        method: "DELETE"
+    })
     if (!response.ok) throw new Error('Failed to delete result data')
   }
 

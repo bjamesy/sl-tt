@@ -14,9 +14,10 @@ const StudentList = () => {
     })()
   }, [])
 
-
   const deleteStudent = async(id) => {
-    const response  = await fetch(`http://127.0.0.1:5000/students/${id}`)
+    const response  = await fetch(`http://127.0.0.1:5000/students/${id}`, {
+        method: "DELETE"
+    })
     if (!response.ok) throw new Error('Failed to delete student data')
   }
 

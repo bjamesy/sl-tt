@@ -3,13 +3,17 @@ import { useForm } from 'react-hook-form'
 const ResultForm = () => {
   const { register, handleSubmit, formState: { errors } } = useForm()
 
-  const onSubmit = (data) => {
-    console.log(data)
-    // Here you can handle form submission, e.g., send data to server, etc.
+  const postCourse = async(data) => {
+    const response  = await fetch(`http://127.0.0.1:5000/courses`,{
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: data
+    })
+    if (!response.ok) throw new Error('Failed to post course data')
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(postCourse)}>
       <div>
         <label htmlFor="name">Course Name:</label>
         <input
