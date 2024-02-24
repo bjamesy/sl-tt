@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 import { useState, useEffect } from 'react'
 
 const ResultForm = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm()
+  const { register, reset, handleSubmit, formState: { errors } } = useForm()
   const [courses, setCourses] = useState([])
   const [students, setStudents] = useState([])
 
@@ -34,6 +34,8 @@ const ResultForm = () => {
         body: JSON.stringify(data)
     })
     if (!response.ok) throw new Error('Failed to post course data')
+    
+    reset()
   }
 
   return (
@@ -45,7 +47,8 @@ const ResultForm = () => {
           id="course"
           {...register('course', { required: true })}
         >
-        { courses.map(course => <option key={course[1]} value={course[1]}>{course[0]}</option> )}
+          <option value="" selected disabled hidden>Choose here</option>
+          { courses.map(course => <option key={course[1]} value={course[1]}>{course[0]}</option> )}
         </select>
         {errors.course && <span>This field is required</span>}
       </div>
@@ -55,7 +58,8 @@ const ResultForm = () => {
           id="student"
           {...register('student', { required: true })}
         >
-        { students.map(student => <option key={student[4]} value={student[4]}>{student[0]}</option> )}
+          <option value="" selected disabled hidden>Choose here</option>
+          { students.map(student => <option key={student[4]} value={student[4]}>{student[0]}</option> )}
         </select>
         {errors.student && <span>This field is required</span>}
       </div>
@@ -65,6 +69,7 @@ const ResultForm = () => {
           id="score"
           {...register('score', { required: true })}
         >
+          <option value="" selected disabled hidden>Choose here</option>
           <option key="A" value="A">A</option>
           <option key="B" value="B">B</option>
           <option key="C" value="C">C</option>
@@ -74,7 +79,7 @@ const ResultForm = () => {
         </select>
         {errors.score && <span>This field is required</span>}
       </div>
-      <button type="submit">Submit</button>
+      <button type="submit" onClick={() => reset()}>Submit</button>
     </form>
   )
 }

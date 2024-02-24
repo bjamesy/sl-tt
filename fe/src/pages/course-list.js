@@ -13,13 +13,15 @@ const CourseList = () => {
         const data = await response.json()
         setCourses(data)
     })()
-  }, [])
+  }, [courses])
 
   const deleteCourse = async(id) => {
     const response  = await fetch(`http://127.0.0.1:5000/courses/${id}`,{
         method: "DELETE"
     })
     if (!response.ok) throw new Error('Failed to delete course data')
+    
+    setCourses([])
   }
 
   return (

@@ -2,7 +2,7 @@
 import { useForm } from 'react-hook-form'
 
 const CourseForm = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm()
+  const { register, reset, handleSubmit, formState: { errors } } = useForm()
 
   const postCourse = async(data) => {
     const options = {
@@ -11,16 +11,9 @@ const CourseForm = () => {
     }
     const response  = await fetch(`http://127.0.0.1:5000/courses`, options)
     if (!response.ok) throw new Error('Failed to post course data')
+    
+    reset()
   }
-  const postStudent = async (data) => {
-    const options = {
-      method: "POST",
-      body: JSON.stringify(data)
-    }
-    const response  = await fetch(`http://127.0.0.1:5000/students`, options)
-    if (!response.ok) throw new Error('Failed to post student data')
-  }
-
 
   return (
     <form onSubmit={handleSubmit(postCourse)}>
