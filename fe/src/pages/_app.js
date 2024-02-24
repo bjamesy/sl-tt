@@ -5,17 +5,13 @@ const MyApp = ({ Component, pageProps }) => {
   return (
     <div>
       <h1>Student Results Management</h1>
-      <nav>
-          <ul>
-              <li><Link href="/">Home</Link></li> 
-              <li><Link href="/student-form">Add New Student</Link></li>  
-              <li><Link href="/student-list">Students List</Link></li>
-              <li><Link href="/course-form">Add New Courses</Link></li>
-              <li><Link href="/course-list">Courses List</Link></li>
-              <li><Link href="/result-form">Add New Results</Link></li>
-              <li><Link href="/result-list">Results List</Link></li>
-          </ul>
-      </nav>
+      <div><Link href="/">Home</Link></div>
+      <div><Link href="/student-form">Add New Student</Link></div>  
+      <div><Link href="/student-list">Students List</Link></div>
+      <div><Link href="/course-form">Add New Courses</Link></div>
+      <div><Link href="/course-list">Courses List</Link></div>
+      <div><Link href="/result-form">Add New Results</Link></div>
+      <div><Link href="/result-list">Results List</Link></div>
       <Component {...pageProps}/>
     </div>
   )

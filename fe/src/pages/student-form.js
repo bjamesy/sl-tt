@@ -4,12 +4,12 @@ import { useForm } from 'react-hook-form'
 const StudentForm = () => {
   const { register, handleSubmit, formState: { errors } } = useForm()
 
-  const postStudent = async (data) => {
-    const response  = await fetch(`http://127.0.0.1:5000/students`,{
-        method: "POST",
-        headers: { 'Content-Type': 'application/json' },
-        body: data
-    })
+  const postStudent = async(data) => {
+    const options = {
+      method: "POST",
+      body: JSON.stringify(data)
+    }
+    const response  = await fetch(`http://127.0.0.1:5000/students`, options)
     if (!response.ok) throw new Error('Failed to post student data')
   }
 

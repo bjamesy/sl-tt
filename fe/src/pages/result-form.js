@@ -7,8 +7,7 @@ const ResultForm = () => {
   const postResult = async(data) => {
     const response  = await fetch(`http://127.0.0.1:5000/results`,{
         method: "POST",
-        headers: { 'Content-Type': 'application/json' },
-        body: data
+        body: JSON.stringify(data)
     })
     if (!response.ok) throw new Error('Failed to post course data')
   }

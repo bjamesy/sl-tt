@@ -33,8 +33,8 @@ const CourseList = () => {
       <tbody>
         {courses.map((course, i) => (
           <tr key={i}>
-            <td>{course[1]}</td>
-            <td><button onClick={deleteCourse(course[0])}/></td>
+            <td>{course[0]}</td>
+            <td><button onClick={() => deleteCourse(course[1])}/></td>
           </tr>
         ))}
       </tbody>
