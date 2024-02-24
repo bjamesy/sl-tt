@@ -4,3 +4,4 @@ to import mysql db, outside of shell run:
 library `Flask-MySQLdb` requires mysql client - help installing dependencies here:
 https://github.com/PyMySQL/mysqlclient#install
 
+to run locally should use library `flask-cors`
