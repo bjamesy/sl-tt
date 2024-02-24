@@ -1,6 +1,7 @@
+"use client"
 import { useForm } from 'react-hook-form'
 
-const StudentForm = () => {
+const ResultForm = () => {
   const { register, handleSubmit, formState: { errors } } = useForm()
 
   const postResult = async(data) => {
@@ -14,6 +15,7 @@ const StudentForm = () => {
 
   return (
     <form onSubmit={handleSubmit(postResult)}>
+      <h3>Add Result</h3>
       <div>
         <label htmlFor="course">Course name:</label>
         <input
@@ -26,7 +28,7 @@ const StudentForm = () => {
       <div>
         <label htmlFor="student">Student name:</label>
         <input
-          type="date"
+          type="text"
           id="student"
           {...register('student', { required: true })}
         />
@@ -35,7 +37,7 @@ const StudentForm = () => {
       <div>
         <label htmlFor="score">Score:</label>
         <input
-          type="score"
+          type="text"
           id="score"
           {...register('score', { required: true })}
         />
@@ -46,4 +48,4 @@ const StudentForm = () => {
   )
 }
 
-export default StudentForm
+export default ResultForm

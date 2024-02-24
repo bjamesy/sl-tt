@@ -1,6 +1,7 @@
+"use client"
 import { useEffect, useState } from 'react'
 
-const CourseTable = () => {
+const CourseList = () => {
   const [courses, setCourses] = useState([])
 
   useEffect(() => {
@@ -41,4 +42,4 @@ const CourseTable = () => {
   )
 }
 
-export default CourseTable
+export default CourseList

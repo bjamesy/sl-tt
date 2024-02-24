@@ -1,3 +1,4 @@
+"use client"
 import { useForm } from 'react-hook-form'
 
 const StudentForm = () => {
@@ -14,23 +15,24 @@ const StudentForm = () => {
 
   return (
     <form onSubmit={handleSubmit(postStudent)}>
+      <h3>Add Student</h3>
       <div>
-        <label htmlFor="firstName">First Name:</label>
+        <label htmlFor="first_name">First Name:</label>
         <input
           type="text"
-          id="firstName"
-          {...register('firstName', { required: true })}
+          id="first_name"
+          {...register('first_name', { required: true })}
         />
-        {errors.firstName && <span>This field is required</span>}
+        {errors.first_name && <span>This field is required</span>}
       </div>
       <div>
-        <label htmlFor="familyName">Family Name:</label>
+        <label htmlFor="last_name">Family Name:</label>
         <input
           type="text"
-          id="familyName"
-          {...register('familyName', { required: true })}
+          id="last_name"
+          {...register('last_name', { required: true })}
         />
-        {errors.familyName && <span>This field is required</span>}
+        {errors.last_name && <span>This field is required</span>}
       </div>
       <div>
         <label htmlFor="dob">Date of Birth:</label>

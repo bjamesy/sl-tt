@@ -1,6 +1,7 @@
+"use client"
 import { useForm } from 'react-hook-form'
 
-const ResultForm = () => {
+const CourseForm = () => {
   const { register, handleSubmit, formState: { errors } } = useForm()
 
   const postCourse = async(data) => {
@@ -14,6 +15,7 @@ const ResultForm = () => {
 
   return (
     <form onSubmit={handleSubmit(postCourse)}>
+      <h3>Add Course</h3>
       <div>
         <label htmlFor="name">Course Name:</label>
         <input
@@ -28,4 +30,4 @@ const ResultForm = () => {
   )
 }
 
-export default ResultForm
+export default CourseForm
