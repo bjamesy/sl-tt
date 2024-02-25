@@ -24,7 +24,6 @@ def delete_students(id):
 
         print("RESPONSE", student_res)
         response = jsonify(student_res)
-        response.headers.add('Access-Control-Allow-Origin', '*')
         return response
 
 
@@ -40,7 +39,6 @@ def students():
 
         response = jsonify(students)
         print("RESPONSE", students)
-        response.headers.add('Access-Control-Allow-Origin', '*')
         return response
     if request.method == "POST":
         data = json.loads(request.data)
@@ -59,7 +57,6 @@ def students():
 
         print("RESPONSE", student_res)
         response = jsonify(student_res)
-        response.headers.add('Access-Control-Allow-Origin', '*')
         return response
 
 
@@ -76,7 +73,6 @@ def courses():
 
         print("RESPONSE", courses)
         response = jsonify(courses)
-        response.headers.add('Access-Control-Allow-Origin', '*')
         return response
     if request.method == "POST":
         data = json.loads(request.data)
@@ -92,7 +88,6 @@ def courses():
 
         print("RESPONSE", course_res)
         response = jsonify(course_res)
-        response.headers.add('Access-Control-Allow-Origin', '*')
         return response
 
 
@@ -109,7 +104,6 @@ def delete_courses(id):
 
         print("RESPONSE", course_res)
         response = jsonify(course_res)
-        response.headers.add('Access-Control-Allow-Origin', '*')
         return response
 
 
@@ -132,7 +126,6 @@ def results():
 
         print("RESPONSE", results_res)
         response = jsonify(results_res)
-        response.headers.add('Access-Control-Allow-Origin', '*')
         return response
     if request.method == "GET":
         db = mysql.connection.cursor()
@@ -144,7 +137,6 @@ def results():
 
         print("RESPONSE", results)
         response = jsonify(results)
-        response.headers.add('Access-Control-Allow-Origin', '*')
         return response
 
 
@@ -161,9 +153,8 @@ def delete_results(id):
 
         print("RESPONSE", result_res)
         response = jsonify(result_res)
-        response.headers.add('Access-Control-Allow-Origin', '*')
         return response
 
 
 if(__name__ == "__main__"):
-    app.run(debug=True)
+    app.run()

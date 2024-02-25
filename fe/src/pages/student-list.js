@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 
 const StudentList = () => {
   const [students, setStudents] = useState([])
+  const [isUpdated, setUpdated] = useState()
 
   useEffect(() => {
     (async () => {
@@ -12,14 +13,14 @@ const StudentList = () => {
         const data = await response.json()
         setStudents(data)
     })()
-  }, [students])
+  }, [isUpdated])
 
   const deleteStudent = async(id) => {
     const options = { method: "DELETE" }
     const response  = await fetch(`http://127.0.0.1:5000/students/${id}`, options)
     if (!response.ok) throw new Error('Failed to delete student data')
-    
-    setStudents([])
+
+    setUpdated(!isUpdated)
   }
 
   return (

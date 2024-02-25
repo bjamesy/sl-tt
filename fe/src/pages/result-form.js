@@ -34,7 +34,7 @@ const ResultForm = () => {
         body: JSON.stringify(data)
     })
     if (!response.ok) throw new Error('Failed to post course data')
-    
+
     reset()
   }
 
@@ -79,7 +79,7 @@ const ResultForm = () => {
         </select>
         {errors.score && <span>This field is required</span>}
       </div>
-      <button type="submit" onClick={() => reset()}>Submit</button>
+      <button type="submit">Submit</button>
     </form>
   )
 }
