@@ -129,10 +129,12 @@ def results():
         return response
     if request.method == "GET":
         db = mysql.connection.cursor()
-        results = db.execute("""SELECT * FROM result""")
+        query = "SELECT * FROM result INNER JOIN student ON result.student = student.id INNER JOIN course ON result.course = course.id"
+        results = db.execute(query)
 
         results = db.fetchall()
-        
+        print("RESULTS", results)
+
         db.close()
 
         print("RESPONSE", results)
