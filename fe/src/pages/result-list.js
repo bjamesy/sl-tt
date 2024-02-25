@@ -38,10 +38,10 @@ const ResultList = () => {
       <tbody>
         {results.map((result, i) => (
           <tr key={i}>
-            <td>{result[0]}</td>
-            <td>{result[1]}</td>
             <td>{result[2]}</td>
-            <td><button onClick={() => deleteResult(result[3])}/></td>
+            <td>{result[3]}</td>
+            <td>{result[0]}</td>
+            <td><button onClick={() => deleteResult(result[1])}/></td>
           </tr>
         ))}
       </tbody>
