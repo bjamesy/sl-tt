@@ -1,15 +1,12 @@
 from flask import Flask, jsonify, request, json, abort
 from flask_mysqldb import MySQL
 from flask_cors import CORS
-import os 
 
 app = Flask(__name__)
 
 app.config.from_pyfile('settings.py')
 
 mysql = MySQL(app)
-
-CORS(app, origins=[os.environ.get("CLIENT_URL")])
 
 #students
 @app.route("/students/<id>", methods=["DELETE"])

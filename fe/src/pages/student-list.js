@@ -1,5 +1,6 @@
 "use client"
 import { useEffect, useState } from 'react'
+import { NEXT_PUBLIC_API_URL } from process.env
 
 const StudentList = () => {
   const [students, setStudents] = useState([])
@@ -7,7 +8,7 @@ const StudentList = () => {
 
   useEffect(() => {
     (async () => {
-        const response = await fetch('http://127.0.0.1:5000/students')
+        const response = await fetch(`${NEXT_PUBLIC_API_URL}/students`)
         if (!response.ok) throw new Error('Failed to fetch student data')
 
         const data = await response.json()
@@ -17,7 +18,7 @@ const StudentList = () => {
 
   const deleteStudent = async(id) => {
     const options = { method: "DELETE" }
-    const response  = await fetch(`http://127.0.0.1:5000/students/${id}`, options)
+    const response  = await fetch(`${NEXT_PUBLIC_API_URL}/students/${id}`, options)
     if (!response.ok) throw new Error('Failed to delete student data')
 
     setIsUpdated(!isUpdated)
