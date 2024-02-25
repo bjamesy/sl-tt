@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 
 const StudentList = () => {
   const [students, setStudents] = useState([])
-  const [isUpdated, setUpdated] = useState()
+  const [isUpdated, setIsUpdated] = useState()
 
   useEffect(() => {
     (async () => {
@@ -20,7 +20,7 @@ const StudentList = () => {
     const response  = await fetch(`http://127.0.0.1:5000/students/${id}`, options)
     if (!response.ok) throw new Error('Failed to delete student data')
 
-    setUpdated(!isUpdated)
+    setIsUpdated(!isUpdated)
   }
 
   return (
@@ -40,9 +40,9 @@ const StudentList = () => {
             <tr key={i}>
               <td>{student[0]}</td>
               <td>{student[1]}</td>
+              <td>{student[5]}</td>
               <td>{student[2]}</td>
-              <td>{student[3]}</td>
-              <td><button onClick={() => deleteStudent(student[4])}/></td>
+              <td><button onClick={() => deleteStudent(student[3])}/></td>
             </tr>
           ))}
         </tbody>

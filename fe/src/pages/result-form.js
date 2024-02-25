@@ -59,7 +59,7 @@ const ResultForm = () => {
           {...register('student', { required: true })}
         >
           <option value="" selected disabled hidden>Choose here</option>
-          { students.map(student => <option key={student[4]} value={student[4]}>{student[0]}</option> )}
+          { students.map(student => <option key={student[3]} value={student[3]}>{student[0] + student[1]}</option> )}
         </select>
         {errors.student && <span>This field is required</span>}
       </div>

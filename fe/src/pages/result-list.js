@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 
 const ResultList = () => {
   const [results, setResults] = useState([])
-  const [isUpdated, setUpdated] = useState()
+  const [isUpdated, setIsUpdated] = useState()
 
   useEffect(() => {
     (async () => {
@@ -22,7 +22,7 @@ const ResultList = () => {
     })
     if (!response.ok) throw new Error('Failed to delete result data')
 
-    setUpdated(!isUpdated)
+    setIsUpdated(!isUpdated)
   }
 
   return (
@@ -39,7 +39,7 @@ const ResultList = () => {
         {results.map((result, i) => (
           <tr key={i}>
             <td>{result[4] + result[5]}</td>
-            <td>{result[9]}</td>
+            <td>{result[10]}</td>
             <td>{result[0]}</td>
             <td><button onClick={() => deleteResult(result[1])}/></td>
           </tr>

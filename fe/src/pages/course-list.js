@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 
 const CourseList = () => {
   const [courses, setCourses] = useState([])
-  const [isUpdated, setUpdated] = useState()
+  const [isUpdated, setIsUpdated] = useState()
 
   useEffect(() => {
     (async () => {
@@ -22,7 +22,7 @@ const CourseList = () => {
     })
     if (!response.ok) throw new Error('Failed to delete course data')
 
-    setUpdated(!isUpdated)
+    setIsUpdated(!isUpdated)
   }
 
   return (
