@@ -1,0 +1,7 @@
+be/venv
+fe/.next
+fe/.env.local
+be/.env
+fe/node_modules
+.vscode/
+.DS_Store
