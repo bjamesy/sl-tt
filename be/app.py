@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, json, abort
+from flask import Flask, jsonify, request, json, abort, make_response
 from flask_mysqldb import MySQL
 from flask_cors import CORS
 import os 
@@ -32,8 +32,13 @@ def delete_students(id):
             print("RESPONSE", student_res)
             response = jsonify(student_res)
             return response
-    except Exception: 
-        return jsonify({"Error": "Invalid request"})
+    except Exception as e: 
+        print("error: ", e)
+        response = make_response(
+            jsonify({ "Error": "Invalid request" }),
+            400
+        )
+        return response
 
 
 @app.route("/students", methods=["POST", "GET"])
@@ -73,7 +78,12 @@ def students():
             response = jsonify(student_res)
             return response
     except Exception as e:
-        return jsonify({"Error": "Invalid request"})
+        print("error: ", e)
+        response = make_response(
+            jsonify({ "Error": "Invalid request" }),
+            400
+        )
+        return response
 
 
 #courses
@@ -110,9 +120,13 @@ def courses():
             print("RESPONSE", course_res)
             response = jsonify(course_res)
             return response
-    except Exception: 
-        return jsonify({"Error": "Invalid request"})
-
+    except Exception as e: 
+        print("error: ", e)
+        response = make_response(
+            jsonify({ "Error": "Invalid request" }),
+            400
+        )
+        return response
 
 
 @app.route("/courses/<id>", methods=["DELETE"])
@@ -135,8 +149,13 @@ def delete_courses(id):
             print("RESPONSE", course_res)
             response = jsonify(course_res)
             return response
-    except Exception: 
-        return jsonify({"Error": "Invalid request"})
+    except Exception as e: 
+        print("error: ", e)
+        response = make_response(
+            jsonify({ "Error": "Invalid request" }),
+            400
+        )
+        return response
 
 
 #results
@@ -176,8 +195,13 @@ def results():
             print("RESPONSE", results)
             response = jsonify(results)
             return response
-    except Exception: 
-        return jsonify({"Error": "Invalid request"})
+    except Exception as e:
+        print("error: ", e)
+        response = make_response(
+            jsonify({ "Error": "Invalid request" }),
+            400
+        )
+        return response
 
 
 @app.route("/results/<id>", methods=["DELETE"])
@@ -199,8 +223,13 @@ def delete_results(id):
             print("RESPONSE", result_res)
             response = jsonify(result_res)
             return response
-    except Exception: 
-        return jsonify({"Error": "Invalid request"})
+    except Exception as e:
+        print("error: ", e)
+        response = make_response(
+            jsonify({ "Error": "Invalid request" }),
+            400
+        )
+        return response
 
 
 if(__name__ == "__main__"):
