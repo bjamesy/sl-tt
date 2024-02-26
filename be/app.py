@@ -16,7 +16,7 @@ CORS(app, origins=[os.environ.get("CLIENT_URL")])
 def delete_students(id):
     try: 
         if request.method == "DELETE":
-            if student_res is None:
+            if id is None:
                 abort(400, "Insufficient fields")
 
             query = f"DELETE FROM student WHERE id={id}"
