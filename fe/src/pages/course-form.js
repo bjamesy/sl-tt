@@ -1,6 +1,5 @@
 "use client"
 import { useForm } from 'react-hook-form'
-import { NEXT_PUBLIC_API_URL } from process.env
 
 const CourseForm = () => {
   const { register, reset, handleSubmit, formState: { errors } } = useForm()
@@ -10,7 +9,7 @@ const CourseForm = () => {
       method: "POST",
       body: JSON.stringify(data)
     }
-    const response  = await fetch(`${NEXT_PUBLIC_API_URL}/courses`, options)
+    const response  = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/courses`, options)
     if (!response.ok) throw new Error('Failed to post course data')
     
     reset()

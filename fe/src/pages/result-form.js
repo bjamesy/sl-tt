@@ -1,7 +1,6 @@
 "use client"
 import { useForm } from 'react-hook-form'
 import { useState, useEffect } from 'react'
-import { NEXT_PUBLIC_API_URL } from process.env
 
 const ResultForm = () => {
   const { register, reset, handleSubmit, formState: { errors } } = useForm()
@@ -10,7 +9,7 @@ const ResultForm = () => {
 
   useEffect(() => {
     (async () => {
-        const response = await fetch(`${NEXT_PUBLIC_API_URL}/students`)
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/students`)
         if (!response.ok) throw new Error('Failed to fetch student data')
 
         const data = await response.json()
@@ -20,7 +19,7 @@ const ResultForm = () => {
 
   useEffect(() => {
     (async () => {
-        const response = await fetch(`${NEXT_PUBLIC_API_URL}/courses`)
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/courses`)
         if (!response.ok) {
           throw new Error('Failed to fetch course data')
         }
@@ -30,7 +29,7 @@ const ResultForm = () => {
   }, [])
 
   const postResult = async(data) => {
-    const response  = await fetch(`${NEXT_PUBLIC_API_URL}/results`,{
+    const response  = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/results`,{
         method: "POST",
         body: JSON.stringify(data)
     })
